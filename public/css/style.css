@@ -1,0 +1,174 @@
+  
+#content {
+	transition: 0.2s;
+	margin: 50px auto 0;
+	padding-bottom: 15px;
+	background: #eee;
+	padding-top: 15px;
+	border-radius: 3px;
+	border: 1px solid #ddd;
+	box-shadow: 1px 1px 2px 1px #ccc;
+	border-right-color: #bbb;
+	border-bottom-color: #bbb;
+}
+
+.player-container{
+	margin-bottom: 15px;
+}
+
+.button-wrapper{
+	display: inline-block;
+	font-family: serif;
+	line-height: 1.9;
+}
+
+.timer-container{
+	float: right;
+	font-weight: bold;
+	color:#666;
+}
+
+.playlist-container{
+	border: 1px solid #ccc;
+	background: #fff;
+	border-radius: 3px;
+}
+
+.playlist-song{
+	padding: 0 15px;
+	cursor: pointer;
+	display: flex;
+	justify-content: space-between;
+	transition: background-color .1s
+}
+
+.playlist-song.playing{
+	transition: border .2s;
+	border-left: 5px solid lightblue;
+}
+
+.playlist-song .col{
+	padding:0;
+}
+
+.playlist-song:hover{
+	background-color: #eee;
+}
+
+.playlist-song.over{
+	border-top: 1px solid black;
+	background-color: #ccc;
+}
+
+.playlist-song.selection{
+	background-color: #ccc;
+}
+
+.playlist-column{
+	display: inline;
+}
+
+.playlist-bottom{
+	height:20px;
+}
+
+.button-control{
+	border-radius: 3px;
+	text-align: center;
+	width: 50px;
+	height: 30px;
+	background: lightgray;
+	display: inline-block;
+	margin: 0 15px 0px 0;
+	cursor: pointer;
+	transition: background .2s;
+}
+
+.button-control:hover{
+	background-color: #add8e6;
+}
+
+.button-control:active{
+	background-color: #5fa5bd;
+	color: #fff;
+}
+
+.seeker-timer{
+	position: absolute;
+	top: -40px;
+	left: -10px;
+	background: #eee;
+	border-radius: 3px;
+	box-shadow: 1px 1px 2px 1px #bbb;
+	padding: 3px;
+	pointer-events: none;
+	transition: opacity .2s;
+	opacity: 0;
+	white-space: nowrap;
+	font-weight: bold;
+	color: #666
+}
+
+.seeker-timer::before {
+	content: ' ';
+	position: absolute;
+	top: 22px;
+	left: 8px;
+	height: 0;
+	width: 0;
+	border: 8px solid lightgray;
+	border-color: transparent transparent #eee #eee;
+	z-index: 1;
+	transform-origin: 0 0;
+	transform: rotate(-45deg);
+	box-shadow: -2px 2px 2px 0 #ccc;
+}
+
+.progress{
+	margin-top:15px;
+	position: relative;
+	overflow: visible;
+	box-shadow: inset -1px 1px 2px #888;
+}
+
+progress {
+	background-color: lightblue;
+    border: 0;
+	border-radius: 3px;
+}
+progress::-webkit-progress-bar {
+	background-color: lightblue;
+    border: 0;
+    border-radius: 3px;
+}
+progress::-webkit-progress-value {
+	background-color: lightblue;
+    border: 0;
+    border-radius: 3px;
+}
+progress::-moz-progress-bar {
+	background-color: lightblue;
+    border: 0;
+    border-radius: 3px;
+}
+progress.progress-bar{
+	background-color: lightblue;
+	width: 0%;
+	transition: none!important
+}
+
+.progress .progress-seeker{
+	width: 20px;
+    height: 20px;
+    border-radius: 50%;
+    position: absolute;
+    top: -2px;
+    background: lightgrey;
+    cursor: pointer;
+	margin-left: -10px;
+	box-shadow: 1px 1px 2px 1px #999;
+}
+
+[draggable]{
+	user-select: none;
+}
