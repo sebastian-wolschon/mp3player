@@ -106,7 +106,7 @@
 	opacity: 0;
 	white-space: nowrap;
 	font-weight: bold;
-	color: #666
+	color: #666;
 }
 
 .seeker-timer::before {
