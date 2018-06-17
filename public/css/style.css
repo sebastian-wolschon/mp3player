@@ -154,7 +154,7 @@ progress::-moz-progress-bar {
 progress.progress-bar{
 	background-color: lightblue;
 	width: 0%;
-	transition: none!important
+	transition: none!important;
 }
 
 .progress .progress-seeker{
