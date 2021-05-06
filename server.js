@@ -16,7 +16,7 @@ const socketServer = http.Server(server);
 const socketIo = require("socket.io");
 const io = socketIo(socketServer);
 
-io.on("connection", socket => {
+io.on("connection", (socket) => {
   console.log("New connection" + socket.id + ", " + socket.conn.remoteAddress);
   io.to(socket.id).emit("update");
 });
@@ -32,7 +32,7 @@ server.post("/uploadsong", (req, res) => {
   console.log("--request received /uploadsong");
   let form = new formidable.IncomingForm();
   console.log("----built form");
-  form.parse(req, function(err, fields, files) {
+  form.parse(req, function (err, fields, files) {
     var oldpath = files.file.path;
     var newpath =
       __dirname +
@@ -40,9 +40,9 @@ server.post("/uploadsong", (req, res) => {
       DataBase.currentPlaylist.songsPath +
       "/" +
       files.file.name;
-    fs.rename(oldpath, newpath, function(err) {
+    fs.rename(oldpath, newpath, function (err) {
       if (err) throw err;
-      DataBase.initDb().then(response => {
+      DataBase.initDb().then((response) => {
         res.write(DataBase.currentPlaylist.json);
         res.end();
         io.emit("update");
@@ -52,10 +52,10 @@ server.post("/uploadsong", (req, res) => {
 });
 
 server.get("/deleteSong", async (req, res) => {
-  let deleteFile = function(file) {
+  let deleteFile = function (file) {
     return new Promise((resolve, reject) => {
       console.log("file", file);
-      fs.stat(__dirname + "/public/source/" + file, function(err, stats) {
+      fs.stat(__dirname + "/public/source/" + file, function (err, stats) {
         //console.log(stats);//here we got all information of file in stats variable
 
         if (err) {
@@ -64,7 +64,7 @@ server.get("/deleteSong", async (req, res) => {
         }
         resolve();
 
-        fs.unlink(__dirname + "/public/source/" + file, function(err) {
+        fs.unlink(__dirname + "/public/source/" + file, function (err) {
           if (err) {
             reject(err);
             return console.log("err", err);
@@ -83,7 +83,7 @@ server.get("/deleteSong", async (req, res) => {
     try {
       await Promise.all(promises);
     } finally {
-      DataBase.initDb().then(response => {
+      DataBase.initDb().then((response) => {
         res.write(DataBase.currentPlaylist.json);
         res.end();
         io.emit("update");
@@ -93,7 +93,7 @@ server.get("/deleteSong", async (req, res) => {
     try {
       await deleteFile(req.query.deleteCandidate);
     } finally {
-      DataBase.initDb().then(response => {
+      DataBase.initDb().then((response) => {
         res.write(DataBase.currentPlaylist.json);
         res.end();
         io.emit("update");
@@ -109,7 +109,7 @@ console.log("Server start");
 const DataBase = {
   filePath: __dirname,
 
-  initDb: async function() {
+  initDb: async function () {
     console.log("--Initializing program database");
     await this.currentPlaylist.populateSongItems();
     console.log("--Building json database");
@@ -132,7 +132,7 @@ const DataBase = {
       this.position = position;
     },
 
-    populateSongItems: async function() {
+    populateSongItems: async function () {
       console.log("----Fetching local songs");
       let localSongs = this.findLocalSongs(this.songsPath);
       const promises = localSongs.map(this.getSongDuration);
@@ -146,7 +146,7 @@ const DataBase = {
       });
     },
 
-    findLocalSongs: function(startpath) {
+    findLocalSongs: function (startpath) {
       let localSongs = [];
       function fromDir(startPath, filter) {
         if (!fs.existsSync(startPath)) {
@@ -168,21 +168,21 @@ const DataBase = {
       return localSongs;
     },
 
-    buildJsonFromSongItems: function() {
+    buildJsonFromSongItems: function () {
       console.log("----Serializing objects");
       let jsonString = JSON.stringify(this.songItems);
       this.json = jsonString;
       return jsonString;
     },
 
-    writeFile: function(
+    writeFile: function (
       file,
       filename = "default.txt",
       path = __dirname + "/public/source/"
     ) {
       let filePath = path + filename;
       console.log("----Saving file at: ", filePath);
-      fs.writeFile(filePath, file, function(err) {
+      fs.writeFile(filePath, file, function (err) {
         if (err) {
           return console.log(err);
         }
@@ -190,10 +190,10 @@ const DataBase = {
       });
     },
 
-    getSongDuration: async function(filename) {
+    getSongDuration: async function (filename) {
       return mp3Duration(filename);
-    }
-  }
+    },
+  },
 };
 
 DataBase.initDb();

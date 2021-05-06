@@ -3,7 +3,12 @@
   "version": "1.0.0",
   "description": "simple mp3 player with node backend",
   "main": "server.js",
-  "dependencies": {},
+  "dependencies": {
+    "express": "^4.17.1",
+    "formidable": "^1.2.2",
+    "mp3-duration": "^1.1.0",
+    "socket.io": "^4.0.1"
+  },
   "devDependencies": {},
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",

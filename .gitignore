@@ -1,3 +1,8 @@
+!song_Db.json
+/public/source/
+!/public/source/file_example_MP3_700KB.mp3
+!/public/source/song_Db.json
+
 # Logs
 logs
 *.log
