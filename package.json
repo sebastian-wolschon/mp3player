@@ -4,7 +4,7 @@
   "description": "simple mp3 player with node backend",
   "main": "server.js",
   "dependencies": {
-    "express": "^4.17.1",
+    "express": "^4.17.3",
     "formidable": "^1.2.2",
     "mp3-duration": "^1.1.0",
     "socket.io": "^4.0.1"
